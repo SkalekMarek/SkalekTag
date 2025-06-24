@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Moje Digitální Vizitka</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+    body {
+      margin: 0;
+      background-color: #000;
+      font-family: 'Poppins', Arial, sans-serif;
+      color: #C8F902;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 900px;
+      width: 100%;
+      padding: 40px 30px;
+    }
+
+    @media(min-width: 768px) {
+      .container {
+        flex-direction: row;
+        align-items: flex-start;
+      }
+    }
+
+    .photo-wrapper {
+      position: relative;
+      width: 320px;
+      height: 420px;
+      border-radius: 25px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      flex-shrink: 0;
+      background: #111;
+    }
+
+    .photo-wrapper img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: 25px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+      filter: none;
+    }
+
+    .photo-wrapper:hover img {
+      transform: scale(1.1);
+    }
+
+    .photo-name {
+      position: absolute;
+      bottom: 25px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      color: white;
+      font-size: 2.4rem;
+      font-weight: 700;
+      text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.9);
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: 1.2px;
+    }
+
+    .photo-hood-external {
+      margin-top: 10px;
+      color: #aaa;
+      font-style: italic;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .info {
+      max-width: 450px;
+      margin-left: 0;
+      width: 100%;
+      margin-top: 30px;
+    }
+
+    @media(min-width: 768px) {
+      .info {
+        margin-left: 50px;
+        margin-top: 0;
+      }
+    }
+
+    .section {
+      background: #1c1c1c;
+      padding: 25px 30px;
+      border-radius: 18px;
+      margin-bottom: 25px;
+      box-shadow: 0 0 15px rgba(200, 249, 2, 0.25);
+      transition: box-shadow 0.3s ease;
+      width: 100%;
+      max-width: 450px;
+      box-sizing: border-box;
+    }
+
+    .section:hover {
+      box-shadow: 0 0 25px rgba(200, 249, 2, 0.6);
+    }
+
+    .section h3 {
+      margin-top: 0;
+      border-bottom: 2px solid #C8F902;
+      padding-bottom: 8px;
+      color: #C8F902;
+      font-weight: 700;
+      font-size: 1.7rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 15px;
+    }
+
+    .section p, .section a {
+      color: #ddd;
+      text-decoration: none;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .section a:hover {
+      color: #b4e000;
+      text-decoration: underline;
+    }
+
+    .save-button {
+      background-color: #C8F902;
+      color: #000;
+      border: 3px solid #C8F902;
+      padding: 15px 50px;
+      font-size: 18px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      box-shadow: 0 0 12px #C8F902;
+      transition: transform 0.3s ease;
+      display: inline-block;
+      margin-top: 10px;
+      user-select: none;
+      position: relative;
+      left: 60px;
+      text-align: center;
+    }
+
+    .save-button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #C8F902;
+      border-color: #a8d100;
+      background-color: #b4e000;
+      color: #000;
+    }
+
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      justify-items: center;
+      margin-top: 15px;
+    }
+
+    .link-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      outline: none;
+      user-select: none;
+      transition: transform 0.2s ease;
+      width: 80px;
+    }
+
+    .link-item:focus,
+    .link-item:hover {
+      transform: scale(1.1);
+    }
+
+    .link-icon {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 6px;
+      border-radius: 12px;
+      background-color: #333;
+      object-fit: contain;
+      display: block;
+      filter: none;
+      transition: transform 0.3s ease;
+    }
+
+    /* TikTok icon zoom on hover */
+    .link-item.tiktok:hover .link-icon {
+      transform: scale(1.2);
+    }
+
+    .link-label {
+      color: #ddd;
+      font-size: 12px;
+      text-align: center;
+      text-transform: lowercase;
+      user-select: none;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <div class="photo-wrapper" title="Fotografie Marek Skála">
+        <img src="ja.jpg" alt="Tvoje fotografie" />
+        <div class="photo-name">Marek Skála</div>
+      </div>
+      <div class="photo-hood-external">Košíře mein hood sind</div>
+    </div>
+
+    <div class="info">
+      <div class="section">
+        <h3>O mně</h3>
+        <p><strong>Jméno:</strong> Marek Skála</p>
+        <p><strong>Město:</strong> Praha</p>
+        <p>Jsem SSPŠ student, věnující se heraldice a IT</p>
+      </div>
+
+      <div class="section">
+        <h3>Kontakt</h3>
+        <p><strong>Telefon:</strong> 725 105 107</p>
+        <p><strong>Email:</strong> <a href="mailto:skalekbusiness@gmail.com">skalekbusiness@gmail.com</a></p>
+        <button class="save-button" id="emailBtn" aria-label="Napište mi email">
+          Napište mi email
+        </button>
+      </div>
+
+      <div class="section links-container">
+        <h3>Linky</h3>
+        <div class="links-grid">
+          <a href="https://www.instagram.com/markoslav_skala8/" target="_blank" class="link-item">
+            <img src="instagram.jpeg" alt="Instagram logo" class="link-icon" />
+            <div class="link-label">instagram</div>
+          </a>
+          <a href="https://discord.com/users/929401274485571645" target="_blank" class="link-item">
+            <img src="discord.png" alt="Discord logo" class="link-icon" />
+            <div class="link-label">discord</div>
+          </a>
+          <a href="https://www.imdb.com/user/ur200700490/?ref_=ext_shr_lnk" target="_blank" class="link-item">
+            <img src="imdb.jpg" alt="IMDb logo" class="link-icon" />
+            <div class="link-label">imdb</div>
+          </a>
+          <a href="https://www.tiktok.com/@skalekmara79?is_from_webapp=1&sender_device=pc" target="_blank" class="link-item tiktok">
+            <img src="tiktok.jpg" alt="TikTok logo" class="link-icon" />
+            <div class="link-label">tiktok</div>
+          </a>
+          <a href="https://open.spotify.com/user/rhsslnvrszje7cyvv6ho6umer?si=f516ec3930e64f3e" target="_blank" class="link-item">
+            <img src="spotify.jpg" alt="Spotify logo" class="link-icon" />
+            <div class="link-label">spotify</div>
+          </a>
+          <a href="https://www.duolingo.com/profile/SkalekMara?via=share_profile_qr" target="_blank" class="link-item">
+            <img src="duolingo.png" alt="Duolingo logo" class="link-icon" />
+            <div class="link-label">duolingo</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('emailBtn').addEventListener('click', function() {
+      window.location.href = 'mailto:skalekbusiness@gmail.com';
+    });
+  </script>
+</body>
+</html>
